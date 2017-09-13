@@ -53,6 +53,7 @@
 #define    kThemeableBrowserEmitCodeLoadFail @"loadfail"
 #define    kThemeableBrowserEmitCodeUnexpected @"unexpected"
 #define    kThemeableBrowserEmitCodeUndefined @"undefined"
+#define    kThemeableBrowserEmitCodeLoadstart @"loadstart"
 
 #define    TOOLBAR_DEF_HEIGHT 44.0
 #define    LOCATIONBAR_HEIGHT 21.0
@@ -533,6 +534,9 @@
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
     }
+
+    [self emitWarning:kThemeableBrowserEmitCodeLoadstart
+                withMessage:[url absoluteString];
 
     // originalUrl is used to detect redirect. This works by storing the
     // request URL of the original frame when it's about to be loaded. A redirect

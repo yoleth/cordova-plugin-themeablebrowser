@@ -101,6 +101,7 @@ public class ThemeableBrowser extends CordovaPlugin {
     private static final String EVT_WRN = "ThemeableBrowserWarning";
     private static final String ERR_CRITICAL = "critical";
     private static final String ERR_LOADFAIL = "loadfail";
+    private static final String EVT_LOADSTART = "loadstart";
     private static final String WRN_UNEXPECTED = "unexpected";
     private static final String WRN_UNDEFINED = "undefined";
 
@@ -1263,6 +1264,9 @@ public class ThemeableBrowser extends CordovaPlugin {
                     Log.e(LOG_TAG, "Error sending sms " + url + ":" + e.toString());
                 }
             }
+
+            emitWarning(EVT_LOADSTART, url);
+
             return false;
         }
 
