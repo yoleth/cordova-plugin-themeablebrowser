@@ -751,9 +751,10 @@ public class ThemeableBrowser extends CordovaPlugin {
                     ((ImageView) title).setAdjustViewBounds(true);
                     ((ImageView) title).setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
+                    int toolbarHeight = toolbarDef != null ? toolbarDef.height : TOOLBAR_DEF_HEIGHT;
                     LinearLayout.LayoutParams titleParams
                             = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                            LayoutParams.MATCH_PARENT, dpToPixels(toolbarHeight/2));
                     titleParams.gravity = Gravity.CENTER;
                     ((ImageView) title).setLayoutParams(titleParams);
 
@@ -941,10 +942,14 @@ public class ThemeableBrowser extends CordovaPlugin {
                     int titleMargin = Math.max(
                             leftContainerWidth, rightContainerWidth);
 
+                    int toolbarHeight = toolbarDef != null ? toolbarDef.height : TOOLBAR_DEF_HEIGHT;
                     LinearLayout.LayoutParams titleParams
-                            = (LinearLayout.LayoutParams) title.getLayoutParams();
-                    titleParams.setMargins(titleMargin, 0, titleMargin, 0);
-                    toolbar.addView(title);
+                            = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, dpToPixels(toolbarHeight/2));
+                    titleParams.gravity = Gravity.CENTER;
+                    titleParams.setMargins(titleMargin, dpToPixels(toolbarHeight/4), titleMargin, dpToPixels(toolbarHeight/4));
+                    ((ImageView) title).setLayoutParams(titleParams);
+
+                    toolbar.addView(title, titleParams);
                 }
 
                 if (features.fullscreen) {
